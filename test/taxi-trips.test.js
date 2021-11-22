@@ -3,7 +3,7 @@ let TaxiTrips = require("../taxi-trips");
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://coder:pg123@localhost:5432/taxis';
+const connectionString = process.env.DATABASE_URL || 'postgresql://coder:pg123@localhost:5432/taxi_trips';
 
 const pool = new Pool({
     connectionString
@@ -30,7 +30,18 @@ describe('Taxi Trips', function () {
     it('should find all the regions', async function () {
 
 
-        assert.deepEqual(['Durban','CapeTown','Gauteng'], await taxiTrip.findAllRegions());
+        assert.deepEqual([{
+               "id": 1,
+               "reg_name": "Durban"
+             },
+              {
+               "id": 2,
+                "reg_name": "Cape Town"
+              },
+             {
+               "id": 3,
+               "reg_name": "Gauteng"
+             }], await taxiTrip.findAllRegions());
 
     });
 
